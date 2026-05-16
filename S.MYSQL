@@ -1,1 +1,48 @@
+drop database if exists users;
+create database users;
+use  users;
+drop database users;
+create table persondetail(
+personid int not null,
+firstname varchar(255) primary key,
+lastname varchar(255) not null,
+date datetime 
+);
+drop table persondetail;
+create table adressdetail(
+firstname varchar(255),
+adress int not null primary key,
+city varchar(100) not null,
+state varchar(100) not null,
 
+foreign key(firstname) REFERENCES persondetail (firstname)
+);
+drop table persondetail;
+insert into  persondetail(personid,firstname,lastname,date) values(100,"samuel","kihu",now());
+insert into  persondetail(personid,firstname,lastname,date) values(150,"john","kihu",now());
+insert into  persondetail(personid,firstname,lastname,date) values(300,"kim","mwaij",now());
+insert into  persondetail(personid,firstname,lastname,date) values(350,"mutanga","mwaij",now());
+
+insert into  adressdetail(firstname,adress,city,state) values ("samuel",356,"thika","nairobi");
+insert into  adressdetail(firstname,adress,city,state) values ("john",3566,"kenol","kisii");
+insert into  adressdetail(firstname,adress,city,state) values ("kim",3,"kenol","kisii");
+insert into  adressdetail(firstname,adress,city,state) values ("mutanga",350066,"thika","kisii");
+
+
+select*from persondetail;
+select*from adressdetail;
+
+select persondetail.personid,
+persondetail.firstname, 
+persondetail.lastname,
+persondetail.date,
+adressdetail.adress,
+adressdetail.city,
+adressdetail.state 
+from persondetail 
+join adressdetail 
+ON persondetail.firstname = adressdetail.firstname;
+  
+ select firstname from adressdetail where city="kenol" and state="kisii";
+ 
+select date from persondetail where personid <=300 and lastname="kihu";
